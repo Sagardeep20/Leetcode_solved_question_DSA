@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+vector < int > sortedArray(vector < int > a, vector < int > b) {
+    // Write your code here
+    int n1 = a.size();
+    int n2 = b.size();
+    set<int> st;
+    for(int i=0;i<n1;i++){
+        st.insert(a[i]);
+    }
+    for(int i=0;i<n2;i++){
+        st.insert(b[i]);
+    }
+
+    vector<int> ans;
+    for(auto it:st){
+        ans.push_back(it);
+    }
+    return ans;
+}
+
+//TC - o(n1logn+n2logn) + o(n1+n2)//at worst case
+//SC - o(n1+n2)+o(n1+n2)
