@@ -1,0 +1,30 @@
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin() , nums1.end());
+        sort(nums2.begin() , nums2.end());
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+        vector<int> ans;
+
+        int i=0,j=0;
+        while(i<n1 && j<n2){
+            if(nums1[i] == nums2[j]){
+                if(ans.size() == 0 || ans.back() != nums1[i]){
+                    ans.push_back(nums1[i]);
+                }
+                i++;
+                j++;
+            }
+            else if(nums1[i] > nums2[j]){
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+        return ans;
+    }
+
+    //TC-o(n1logn1 + n2logn2 + n1+n2)  here n1logn1 for sort of array1 
+                                            n2logn2 for sort of array 2
+                                            n1+n2 to traverse in the two array at most in the loop
+   //Sc - o(min(n1+n2)) 
