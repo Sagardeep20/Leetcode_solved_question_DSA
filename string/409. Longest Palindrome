@@ -1,0 +1,71 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int n = s.size();
+        /*unordered_map<char , int> mpp;
+
+        for(int i=0;i<n;i++){
+            mpp[s[i]]++;
+        }
+        int len = 0;
+        bool hasOdd = false;
+        for(auto it:mpp){
+            if(it.second % 2 == 0){
+                len += it.second;
+            }
+            else{
+                len += (it.second-1);
+                hasOdd = true;
+            }
+        }
+
+        if(hasOdd) len += 1;
+        
+        return len;
+        U - is the unique elements in map
+        TC-o(n*1 + U) as unorderd_map take o(1) to store each element in it
+        SC - o(U)*/
+
+        vector<int>lower(26,0);
+        vector<int> upper(26,0);
+
+        for(int i=0;i<n;i++){
+            if(s[i] >= 'a' && s[i] <= 'z'){
+                lower[s[i] - 'a']++;
+            }
+            if(s[i] >= 'A' && s[i] <= 'Z'){
+                upper[s[i] - 'A']++;
+            }
+        }
+        int len = 0,oddL=0;
+        for(int i=0;i<26;i++){
+            if(lower[i] %2 == 0){
+                len = len + lower[i];
+            }
+            else if(lower[i] %2 != 0){
+                len = len + lower[i] - 1;
+                oddL = 1;
+            }
+
+        }
+       
+        
+        int oddU=0;
+        for(int i=0;i<26;i++){
+            if(upper[i] %2 == 0){
+                len = len + upper[i];
+            }
+            else if(upper[i] %2 != 0){
+                len = len + upper[i] - 1;
+                oddU = 1;
+            }
+
+        }
+        if(oddL == 1 || oddU == 1)len +=1;
+
+        return len;
+
+        // TC-o(n+26) == o(n)
+        //sc - o(26 + 26) ==0(1)
+    }
+};
