@@ -1,0 +1,32 @@
+
+class Solution {
+public:
+    bool checkIfPangram(string sentence) {
+       /* unordered_map<char , int>mpp;
+        for(int i=0;i<sentence.size();i++){
+            mpp[sentence[i]]++;
+        }
+
+        if(mpp.size() != 26){
+            return false;
+        }
+        else{
+            return true;
+        }*/
+
+        vector<int> seen(26,0);
+        for(char &c:sentence){
+            seen[c - 'a'] += 1;
+        }
+        for(int &i:seen){
+            if(i == 0){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+};
+
+TC-o(N)
+sc-o(1)  for both the code...but vector is slighlty optimised
