@@ -1,0 +1,30 @@
+string sort(string s) {
+    // complete the function here
+    // sort(s.begin() , s.end());
+    // return s;
+    
+    //TC-o(nlogn) sc-0(1)
+    
+    
+    vector<int>freeq(26,0);
+    
+   for(int i=0;i<s.size();i++){
+        freeq[s[i] - 'a']++;
+    }
+    //tc - o(n)
+    
+    string ans = "";
+    for(int i=0;i<26;i++){
+        while(freeq[i] > 0){
+            ans += (char)('a' + i);
+            freeq[i]--;
+        }
+    }
+    //tc-o(26)
+    
+    
+    return ans;
+    //o(n+26) = o(n)
+    
+    //Sc-0(26vector + 26string) = o(1)
+}
