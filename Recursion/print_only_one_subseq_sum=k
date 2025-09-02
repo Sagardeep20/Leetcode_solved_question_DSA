@@ -1,0 +1,40 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+bool printOnlyOne_subseq(int idx , int sum , int k , vector<int> &ans , int n , int arr[]){
+    //base case
+    if(idx >= n){
+        if(sum == k){
+            for(auto it:ans){
+                cout<<it;
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    //take it
+    ans.push_back(arr[idx]);
+    sum += arr[idx];
+    if(printOnlyOne_subseq(idx+1 , sum , k , ans , n , arr)){
+        return true;
+    }
+
+    //not take it
+    ans.pop_back();
+    sum -= arr[idx];
+    if(printOnlyOne_subseq(idx+1 , sum , k, ans , n , arr)){
+        return true;
+    }
+
+    return false;
+}
+int main(){
+    int arr[3] = {1,2,1};
+    int k = 2;
+    vector<int> ans;
+    
+    printOnlyOne_subseq(0 , 0 , k , ans , 3 , arr);  
+}
