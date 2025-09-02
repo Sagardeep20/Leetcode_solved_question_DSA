@@ -3,7 +3,6 @@ using namespace std;
 
 int ptintSubsequences_sumK(int idx , vector<int> &ans , int sum , int n , int arr[] , int k){
     if(idx >= n){
-        
         if(sum == k){
             cout<<"printing the subsequences :- "<<endl;
             for(auto it:ans){
@@ -11,9 +10,6 @@ int ptintSubsequences_sumK(int idx , vector<int> &ans , int sum , int n , int ar
             }
             cout<<endl;
         }
-        
-        
-
         return 0;
     }
 
