@@ -1,0 +1,28 @@
+int cntSum_k_subseq(int idx , int sum , int k , int arr[] , int n){
+    if(idx>=n){
+        if(sum == k){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    sum += arr[idx];
+    int l = cntSum_k_subseq(idx+1 , sum , k , arr , n);
+
+    sum -= arr[idx];
+    int r  = cntSum_k_subseq(idx+1 , sum , k , arr , n);
+    
+    return l+r;
+}
+
+int main(){
+    int arr[5] = {1,2,1,4,1};
+    int k = 3;
+   // vector<int> ans;  -->> we dont need additional vector to store subseq
+                            //as we dont asked to print subseq  ,, we just need the count
+     
+    
+    cout<<cntSum_k_subseq(0 , 0 , k , arr , 5);
+}
