@@ -27,5 +27,11 @@ public:
     }
 };
 
-//TC-o(N*2^T)
-//sc-0(T)
+//TC-o(2^T * k)
+//sc-0(k * x)
+
+T is the ;--bcz for each element i have two option pick/non pick...from that n elements ..suppose i have to do for t elements..then it
+would be 2^T && k is to push list from ds to ans 
+x - no of possible combinatiopn in ans 
+[[2,2,3],[7]]
+here x is 2
