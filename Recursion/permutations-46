@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void findAllPermutation(vector<int> &ds , vector<vector<int>> &ans , vector<int> &nums , vector<int> &freeq){
+        if(ds.size() == nums.size()){
+            ans.push_back(ds);
+            return ; 
+        }
+
+        for(int i=0;i<nums.size();i++){
+            if(freeq[i] == 0){
+                ds.push_back(nums[i]);
+                freeq[i] = 1;
+                findAllPermutation(ds , ans , nums , freeq);
+
+                ds.pop_back();
+                freeq[i] = 0;
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ds;
+        vector<vector<int>> ans;
+        vector<int> freeq(n,0);
+        // int freeq[nums.size()] = {0};
+        // for(int i=0;i<n;i++){
+        //     freeq[i] = 0;
+        // }
+
+        findAllPermutation(ds , ans , nums , freeq);
+        return ans;
+    }
+};
