@@ -1,0 +1,15 @@
+ TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(root == NULL){
+            TreeNode* addVal = new TreeNode(val);
+            return addVal;
+        }
+
+        if(val > root->val){
+            root->right = insertIntoBST(root->right , val);
+        }
+        if(val < root->val){
+            root->left = insertIntoBST(root->left , val);
+        }
+        return root;
+        
+    }
