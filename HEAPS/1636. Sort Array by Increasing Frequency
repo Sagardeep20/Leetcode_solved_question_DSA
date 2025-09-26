@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> frequencySort(vector<int>& nums) {
+        unordered_map<int,int> mpp;
+        for(int i=0;i<nums.size();i++){
+            mpp[nums[i]]++;
+        }
+
+        auto mycomparator = [](const pair<int,int>& a, const pair<int,int>& b){
+            if(a.first == b.first){
+                return a.second<b.second;
+            }return a.first>b.first;
+        };
+
+        using freeqPair = pair<int,int>;
+        priority_queue<freeqPair , vector<freeqPair> , decltype(mycomparator)>minHeap(mycomparator);
+        for(auto &it:mpp){
+            minHeap.push({it.second,it.first});
+        }
+        vector<int> ans;
+        while(minHeap.size() != 0){
+            int freeq = minHeap.top().first;
+            int el = minHeap.top().second;
+            
+            for(int i=0;i<freeq;i++){
+                ans.push_back(el);
+            }
+            
+            minHeap.pop();
+        }
+        
+        return ans;
+    }
+};
