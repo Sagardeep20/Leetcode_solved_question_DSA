@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        using pairIn = pair<double , vector<int>> ;
+        priority_queue<pairIn> maxHeap;
+
+        for(int i=0;i<points.size();i++){
+            double dist = sqrt(pow(points[i][0] , 2) + pow(points[i][1] , 2) );
+
+            maxHeap.push({dist , {points[i][0] , points[i][1]}});
+
+            if(maxHeap.size() > k){
+                maxHeap.pop();
+            }
+        }  // o(n * logk) loop running for n times and puahing iun maxHeap
+        vector<vector<int>> ans;
+        while(maxHeap.size()!=0){
+            ans.push_back(maxHeap.top().second);
+
+            maxHeap.pop();
+        }//o(k*logk) heap left with size k and pop it out to poush in ans logk
+        return ans;
+    }
+};
+
+//tc-o(n*logk)+o(klogk)
+//sc-o(k)
