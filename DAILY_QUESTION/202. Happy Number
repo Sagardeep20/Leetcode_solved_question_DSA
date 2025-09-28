@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+        //BASE CASE
+        if(n == 1 || n==7){
+            return true;
+        }
+        if(n < 10){
+            return false;
+        }
+        /*
+        if i use val vector space com - o(logn) to reduce that we 
+        are directly do the pow(rem , 2) and add it to nums & recursion call
+
+        vector<int> val;
+        while(n != 0){
+            int rem = n%10;
+            n = n/10;
+            val.push_back(rem);
+        }
+        long long nums = 0;
+        for(int i=0;i<val.size();i++){
+            nums = nums + pow(val[i],2);
+        }*/
+        long long nums =0;
+        while(n != 0){
+            int rem = n%10;
+            n = n/10;
+            nums = nums + pow(rem,2);
+        }
+        return isHappy(nums);
+        
+    }
+};
+/*
+TC-o(logn)  extracting each num takes logn from n(given)
+sc-o(logn) if i use vector<int> val  else
+sc-o(1) optimised*/
