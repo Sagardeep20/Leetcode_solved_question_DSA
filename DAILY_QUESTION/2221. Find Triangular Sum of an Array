@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int triangularSum(vector<int>& nums) {
+        queue<int> q;
+        if(nums.size() == 1)return nums[0];
+        if(nums.size() == 0){
+            return 0;
+        }
+
+        for(int i=0;i<nums.size()-1;i++){
+            q.push((nums[i]+nums[i+1]) % 10);
+        }
+        while(q.size() != 1){
+            int sizeCheck = q.size();
+            while(sizeCheck != 1){
+                int x = q.front();
+                q.pop();
+                int y = q.front();
+                int val = (x+y) % 10;
+                q.push(val);
+                sizeCheck--;
+            }
+            if(sizeCheck == 1){
+                q.pop();
+            }
+            
+        }
+        return q.front();
+
+    }
+};
