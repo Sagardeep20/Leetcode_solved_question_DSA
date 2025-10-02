@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int sumOfTheDigitsOfHarshadNumber(int x) {
+        int n = x;
+        int digitSum = 0;
+        while(n != 0){
+            digitSum += (n%10);
+            n = n/10;
+        }
+//this while loop will run at max d = log10(x) + 1 where dis the no of digits of x 
+
+        if(x % digitSum == 0){
+            return digitSum;
+        }
+        return -1;
+    }
+};
+TC-log(x)
+sc-o(1)
