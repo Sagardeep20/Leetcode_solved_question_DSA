@@ -35,28 +35,31 @@ class heaps{
     }
 
     void deletFromHeaps(){
-        int i=1;
-        if(size == 0){
-            return;
-        }
+        if(size == 0)return ;
 
-        arr[i] = arr[size];
+        arr[1] = arr[size];
         size--;
 
-        while(i < size){
-            int leftIdx = 2*i;
-            int rightIdx = 2*i + 1;
+        int i=1;
+        while(i <= size){
+            int largest = i;
+            int leftChild = 2*i;
+            int rightChild = 2*i+1;
 
-            if(leftIdx < size && arr[i] < arr[leftIdx]){
-                swap(arr[i] , arr[leftIdx]);
-                i = leftIdx;
+            if(leftChild <= size && arr[largest] < arr[leftChild]){
+                largest = leftChild;
             }
-            else if(rightIdx < size && arr[i] < arr[rightIdx]){
-                swap(arr[i] , arr[rightIdx]);
-                i = rightIdx;
+            if(rightChild <= size &&  arr[largest] < arr[rightChild]){
+                largest = rightChild;
             }
+
+            if(i != largest){
+                swap(arr[i] , arr[largest]);
+                i = largest;
+            }
+
             else{
-                return ;
+                break;
             }
         }
     }
@@ -67,13 +70,14 @@ class heaps{
 };
 int main(){
     heaps h;
-    h.insertInHeap(60);
-    h.insertInHeap(60);
-    h.insertInHeap(20);
+    
     h.insertInHeap(50);
     h.insertInHeap(30);
-    h.insertInHeap(55);
     h.insertInHeap(70);
+    h.insertInHeap(15);
+    h.insertInHeap(18);
+    h.insertInHeap(9);
+    h.insertInHeap(20);
 
     h.print();
     
