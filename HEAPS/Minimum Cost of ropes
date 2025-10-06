@@ -1,0 +1,29 @@
+class Solution {
+  public:
+    int minCost(vector<int>& arr) {
+        // code here
+        if(arr.size() == 1)return 0;
+        
+        priority_queue<int , vector<int> , greater<int>> minHeap;
+        
+        for(int i=0;i<arr.size();i++){
+            minHeap.push(arr[i]);
+        }
+        int totalCost = 0;
+        while(minHeap.size() != 1){
+            int x = minHeap.top();
+            minHeap.pop();
+            int y= minHeap.top();
+            minHeap.pop();
+            
+            int sum = (x+y);
+            totalCost = totalCost + (sum);
+            minHeap.push(sum);
+            
+        }
+        return totalCost;
+    }
+};
+
+Tc-o(nlogn)
+sc-o(n)
