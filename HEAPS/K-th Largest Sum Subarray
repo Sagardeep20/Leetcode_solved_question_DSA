@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+int getKthLargest(vector<int> &arr, int k)
+{
+	/*vector<int> sumStore;
+	int n=arr.size();
+	for(int i=0;i<n;i++){
+		int sum = 0;
+		for(int j=i;j<n;j++){
+			sum += arr[j];
+			sumStore.push_back(sum);
+		}
+	}
+
+	sort(sumStore.begin() , sumStore.end());
+
+	int size = sumStore.size();
+	return sumStore[size - k];
+	
+	TC=o(n^2) + o(n^2 log n^2) SC = o(n^2)
+	*/
+	int n = arr.size();
+	priority_queue<int , vector<int> , greater<int>> minHeap;
+	for(int i=0;i<n;i++){
+		int sum = 0;
+		for(int j=i;j<n;j++){
+			sum += arr[j];
+			minHeap.push(sum);
+			if(minHeap.size() > k){
+				minHeap.pop();
+			}
+		}
+	}
+
+	return minHeap.top();
+
+}Tc-o(n^2 * logk)
+sc-o(k)
