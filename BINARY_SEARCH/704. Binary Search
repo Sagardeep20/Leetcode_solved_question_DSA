@@ -1,0 +1,40 @@
+class Solution {
+public:
+/*
+    int findTarget(vector<int>& nums,int s,int h,int target){
+        int m = s+(h-s)/2;
+        if(s>h)return -1;
+        
+        if(nums[m] == target){
+            return m;
+        }
+        if(nums[m] < target){
+            return findTarget(nums , m+1 , h , target);
+        }else{
+            return findTarget(nums , s , m-1 , target);
+        }
+        
+        
+    }*/
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        // return findTarget(nums,0,n-1,target);
+
+        int s = 0, h = n-1;
+        while(s<=h){
+            int m = s+(h-s/2);
+            if(nums[m] == target){
+                return m;
+            }
+            if(nums[m] > target){
+                h = m-1;
+            }else{
+                s = m+1;
+            }
+        }
+        return -1;
+    }
+};
+
+TC-o(log n )
+sc - 0(1)
