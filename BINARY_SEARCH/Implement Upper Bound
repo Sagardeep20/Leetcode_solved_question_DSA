@@ -1,0 +1,20 @@
+int upperBound(vector<int> &arr, int x, int n){
+	// Write your code here.	
+	int s = 0,h=n-1;
+	int ans = n;
+	while(s <= h){
+		int mid = s + (h-s)/2;
+
+		if(arr[mid] <= x){
+			s = mid+1;
+		}
+		else{
+			//arr[i] > x
+			ans = mid;
+			h = mid-1;
+
+		}
+		
+	}
+	return ans;
+}
