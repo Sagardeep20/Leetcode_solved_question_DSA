@@ -1,45 +1,46 @@
 class Solution {
 public:
-    int firstOcc(vector<int>& nums, int target ,int n ){
-        int s = 0, h = n-1;
-        int ans1 = -1;
-        while(s<=h){
-            int m  = (s+h)/2;
-            if(nums[m] == target){
-                ans1 = m;
-                h = m-1; 
-            }
-            if(nums[m] < target){
-                s = m+1;
-            }
-            else{
-                h = m-1;
+    int firstOcc(vector<int>& nums,int target){
+        int n = nums.size();
+        int first = -1;
+        int s = 0,h=n-1;
+
+        while(s <= h){
+            int mid = s + (h-s)/2;
+            if(nums[mid] == target){
+                first = mid;
+                h = mid-1;
+            }else if(nums[mid] < target){
+                s = mid+1;
+            }else{
+                h = mid-1;
             }
         }
-        return ans1;
+        return first;
     }
-    int lastOcc(vector<int>& nums, int target , int n ){
-        int s = 0, h = n-1;
-        int ans2 = -1;
+    int lastOcc(vector<int>& nums,int target){
+        int n = nums.size();
+        int last = -1;
+        int s = 0,h=n-1;
+
         while(s<=h){
-            int m = (s+h)/2;
-            if(nums[m] == target){
-                ans2 = m;
-                s = m+1;
-            }
-            if(nums[m] > target){
-                h = m-1;
-            }
-            else{
-                s = m+1;
+            int mid = s + (h-s)/2;
+            if(nums[mid] == target){
+                last = mid;
+                s = mid+1;
+            }else if(nums[mid] < target){
+                s = mid+1;
+            }else{
+                h = mid-1;
             }
         }
-        return ans2;
+        return last;
     }
     vector<int> searchRange(vector<int>& nums, int target) {
-        int n = nums.size();
-        int first = firstOcc(nums,target,n);
-        int last  = lastOcc(nums,target , n);
-        return {first,last};
+        vector<int>ans = {firstOcc(nums,target) , lastOcc(nums,target)};
+        return ans;
     }
 };
+
+TC - o(logn)
+sc-o(1)
