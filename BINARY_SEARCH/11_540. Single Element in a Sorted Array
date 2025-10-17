@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        if(n == 1)return  nums[0];
+        int s=0,h=n-1;
+        while(s<=h){
+            int mid = s +(h-s)/2;
+            if(mid % 2 == 0){
+                //mid is even
+                if(nums[mid] == nums[mid+1]){
+                    s = mid+1;
+                }else{
+                    h =mid-1;
+                }
+            }else{
+                //mid is odd
+                if(nums[mid] == nums[mid-1]){
+                    s = mid+1;
+                }else{
+                    h = mid-1;
+                }
+            }
+        }
+        return nums[s];
+    }
+};
