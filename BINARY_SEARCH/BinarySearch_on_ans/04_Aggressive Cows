@@ -30,4 +30,8 @@ class Solution {
     }
 };
 
+the objective - minimum distance between any two of them is the maximum possible. 
+
+:- min dist is at left side and to get that ans should be attachd with s = mid+1
+
 link- https://www.geeksforgeeks.org/problems/aggressive-cows/1
