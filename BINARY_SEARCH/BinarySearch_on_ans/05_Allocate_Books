@@ -1,0 +1,44 @@
+class Solution {
+  public:
+    bool isPossible(vector<int>&arr,int k,int mid){
+        int sum = 0;
+        int cnt = 0;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i] + sum <= mid){
+                sum += arr[i];
+            }else{
+                cnt++;
+                if(cnt >= k || arr[i]>mid)return false;
+                sum = arr[i];
+            }
+        }
+        return true;
+    }
+    int findPages(vector<int> &arr, int k) {
+        // code here
+        if(k > arr.size())return -1;
+        
+        int s = 1;
+        int h = accumulate(arr.begin(),arr.end(),0);
+        int ans = -1;
+        while(s <= h){
+            int mid = s + (h-s)/2 ;
+            if(isPossible(arr,k,mid)==true){
+                ans  = mid;
+                h = mid-1;
+            }else{
+                s = mid+1;
+            }
+        }
+        return ans;
+    }
+};
+
+//NOTE-The objective is to minimize the maximum number of pages 
+max no of pages at h means right side and i have to get the min among them so adjust ans 
+//adjust ans in h = mid-1
+
+TC-o(log(range)*n)
+Sc-o(1)
+
+link - https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
