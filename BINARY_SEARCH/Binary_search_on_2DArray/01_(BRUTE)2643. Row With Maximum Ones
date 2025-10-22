@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+
+        int NoOfOne = 0;
+        int NoOfRow = 0;
+        int cnt  = 0;
+        for(int i=0;i<n;i++){
+            cnt  = 0;
+            for(int j=0;j<m;j++){
+                if(mat[i][j] == 1){
+                    cnt++;
+                }
+            }
+            if(cnt > NoOfOne){
+                NoOfOne = cnt;
+                NoOfRow = i;
+            }
+        }
+        return {NoOfRow , NoOfOne};
+
+    }
+}; 
+
+TC-o(n*m)
+sc-o(1)
