@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int totalMoney(int n) {
+        int cycle = n/7;
+        int rem = n%7;
+        int x = 1;
+        int  totalSum = 0,sumForCycle = 0,remSum = 0;
+        while(cycle > 0){
+            int num = 7;
+            sumForCycle += ((num)*(2*x + (num-1)*1))/2;
+            cycle--;
+            x++;
+        }
+        remSum += ((rem)*(2*x + (rem-1)*1))/2;
+        totalSum = sumForCycle+remSum;
+        return totalSum;
+    }
+};
