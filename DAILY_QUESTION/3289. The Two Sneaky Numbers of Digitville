@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> getSneakyNumbers(vector<int>& nums) {
+        /*
+        vector<int>ansArray;
+        unordered_map<int,int>mpp;
+        for(int i=0;i<nums.size();i++){
+            mpp[nums[i]]++;
+        }
+        for(auto &it : mpp){
+            if(it.second > 1){
+                ansArray.push_back(it.first);
+            }
+        }
+        return ansArray;
+//Tc-o(n) 
+  SC-o(n)
+    */
+    vector<int>ans;
+    int hashArray[100] = {0};
+    for(int i=0;i<nums.size();i++){
+        hashArray[nums[i]]++;
+    }
+    for(int i=0;i<100;i++){
+        if(hashArray[i] > 1){
+            ans.push_back(i);
+        }
+    }
+    return ans;
+    }
+//TC-o(n)  SC-o(1)
+};
