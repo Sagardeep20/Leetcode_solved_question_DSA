@@ -1,0 +1,45 @@
+// User function template for C++
+
+gfg - https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
+TC-o(n)+o(k)  SC-o(K)  k is the size of map
+class Solution {
+  public:
+    int search(string &pat, string &txt) {
+        // code here
+        unordered_map<char,int>mpp;
+        int k = pat.size();
+        for(int i=0;i<pat.size();i++){
+            mpp[pat[i]]++;
+        }
+        int cnt = mpp.size();
+        int ans = 0;
+        int i=0,j=0;
+        
+        while(j < txt.size()){
+            //condition
+            if(mpp.find(txt[j]) != mpp.end()){
+                mpp[txt[j]]--;
+                if(mpp[txt[j]] == 0){
+                    cnt--;
+                }
+            }
+            
+            if(j-i+1 < k)j++;
+            else if(j-i+1 == k){
+                //condition
+                if(cnt == 0)ans++;
+                
+                
+                //inc the window 
+                if(mpp.find(txt[i]) != mpp.end()){
+                    if(mpp[txt[i]] == 0)cnt++;
+                    mpp[txt[i]]++;
+                }
+                i++;
+                j++;
+            }
+        }
+        return ans;
+        
+    }
+};
