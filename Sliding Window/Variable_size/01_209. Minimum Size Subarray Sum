@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int len=0,minLen = INT_MAX;
+        int sum = 0;
+        int i=0,j=0;
+        while(j<nums.size()){
+            sum += nums[j];
+            if(sum < target)j++;
+            else if(sum >= target){
+                while(sum>=target){
+                    sum = sum-nums[i];
+                    len = j-i+1;
+                    minLen = min(len,minLen);
+                    i++;
+                }
+                j++;
+            }
+        }
+
+        if(minLen != INT_MAX)return minLen;
+        return 0;
+    }
+};
+
+      TC-o(n) SC-o(1)
