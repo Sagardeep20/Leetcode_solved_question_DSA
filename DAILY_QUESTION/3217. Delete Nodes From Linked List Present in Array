@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+        if(head == NULL)return NULL;
+
+        set<int>st;
+        for(int i=0;i<nums.size();i++){
+            st.insert(nums[i]);
+        }
+
+        while(head!=NULL && st.count(head->val)){
+            head = head->next;
+        }
+
+        if(head == NULL)return NULL;
+
+        ListNode* current = head;
+        while(current->next != NULL){
+            if( st.count(current->next->val) ){
+                current->next = current->next->next;
+            }else{
+                current = current->next;
+            }
+        }
+
+        return head;
+
+    }
+};
+
+
+TIME COMPLEXITY
+Step-by-step:
+
+Building the set →
+Inserting m elements (where m = nums.size())
+⇒ O(m log m) (because set is implemented as a balanced BST).
+
+Removing head nodes →
+Worst case, you may check every node once.
+⇒ O(n log m) because for each node, you do st.count(val) (log m per lookup).
+
+Traversing the remaining list →
+Again, one pass through all nodes, each lookup takes O(log m)
+⇒ O(n log m).
+
+✅ Total Time Complexity
+𝑂(𝑚log𝑚 + 𝑛log𝑚)
+
+SC-o(m)
+
