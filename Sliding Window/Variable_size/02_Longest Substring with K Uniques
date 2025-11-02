@@ -1,0 +1,43 @@
+GFG LINK -- https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1
+
+class Solution {
+  public:
+    int longestKSubstr(string &s, int k) {
+        // code here
+        unordered_map<char,int>mpp;
+        int len = 0,maxlen = -1;
+        int i=0,j=0;
+        int cnt = 0;
+        while(j < s.size()){
+            mpp[s[j]]++;
+            cnt = mpp.size();
+            
+            if(cnt < k)j++;
+            else if(cnt == k){
+                len = (j-i+1);
+                maxlen = max(len , maxlen);
+                j++;
+            }else if(cnt > k){
+                while(cnt > k){
+                    mpp[s[i]]--;
+                    if(mpp[s[i]] == 0){
+                        mpp.erase(s[i]);
+                        cnt = mpp.size();
+                    }
+                    i++;
+                }
+                
+                if(cnt == k){
+                    len = j-i+1;
+                    maxlen = max(len , maxlen);
+                }
+                j++;
+            }
+            
+        }
+        return maxlen;
+        
+    }
+};
+
+TC-o(n)   SC-0(k)
