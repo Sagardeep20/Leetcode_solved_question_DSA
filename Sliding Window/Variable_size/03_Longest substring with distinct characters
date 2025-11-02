@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    int longestUniqueSubstr(string &s) {
+        // code here
+        unordered_map<char,int>mpp;
+        int i=0,j=0;
+        int len = 0,maxLen =INT_MIN;
+        while(j<s.size()){
+            mpp[s[j]]++;
+            
+            if(mpp.size() == (j-i+1)){
+                len = j-i+1;
+                maxLen = max(len , maxLen);
+                j++;
+            }
+            else if(mpp.size() < (j-i+1)){
+                while(mpp.size() < (j-i+1) ){
+                    mpp[s[i]]--;
+                    if(mpp[s[i]] == 0){
+                        mpp.erase(s[i]);
+                    }
+                    i++;
+                }
+                
+                if(mpp.size() == (j-i+1)){
+                    len = j-i+1;
+                    maxLen = max(len , maxLen);
+                }
+                
+                j++;
+            }
+        }
+        
+        return maxLen;
+    }
+};
