@@ -1,0 +1,62 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        /*
+        unordered_map<char,int>mpp1 , mpp2;
+        for(int i=0;i<s1.size();i++){
+            mpp1[s1[i]]++;
+        }
+        int i=0,j=0;
+        int k = s1.size();
+        while(j<s2.size()){
+            //condition
+            mpp2[s2[j]]++;
+            //first if in fixed size SW
+            if((j-i+1) < k){
+                j++;
+            }
+            else if((j-i+1)== k){
+                if(mpp1 == mpp2)return true;
+                else{
+                    //both maps are not same
+                    //inc the window and comapres till equal
+                    mpp2[s2[i]]--;
+                    if(mpp2[s2[i]] == 0){
+                        mpp2.erase(s2[i]);
+                    }
+                    i++;
+                    j++;
+                }
+            }
+        }
+        return false;
+
+TC-o(n)+o(s1.size())--for mpp1 + o(s1.size())--for mpp2
+SC - o(s.size()) -- for mpp1 + o(s1.size())--for mpp2
+        */
+
+        vector<char>freeq1(26,0);
+        vector<char>freeq2(26,0);
+        for(auto &i : s1){
+            freeq1[i-'a']++;
+        }
+        int i=0,j=0;
+        int len1 = s1.size();
+        while(j < s2.size()){
+            freeq2[s2[j]-'a']++;
+            if((j-i+1) < len1){
+                j++;
+            }
+            else if((j-i+1) == len1){
+                if(freeq1 == freeq2)return true;
+                else{
+                    freeq2[s2[i]-'a']--;
+                    i++;
+                    j++;
+                }
+            }
+        }
+        return false;
+TC-o(n) SC - o(1)
+    }
+};
