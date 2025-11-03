@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        unordered_map<int,int>mpp;
+        int i=0,j=0;
+        int k=2;
+        int len=0,maxlen=0;
+        // if(fruits.size() < k)return fruits.size();
+
+        while(j<fruits.size()){
+            mpp[fruits[j]]++;
+            if(mpp.size() < k){
+                j++;
+            }else if(mpp.size() == k){
+                len = j-i+1;
+                maxlen = max(len,maxlen);
+                j++;
+            }
+            else if(mpp.size() > k){
+                while(mpp.size() > k){
+                    mpp[fruits[i]]--;
+                    if(mpp[fruits[i]] == 0){
+                        mpp.erase(fruits[i]);
+                    }
+                    i++;
+                }
+                if(mpp.size() == k){
+                    len = j-i+1;
+                    maxlen = max(len , maxlen);
+                }
+                j++;
+            }
+        }
+        if(mpp.size() < k)return mpp[fruits[0]];
+        return maxlen;
+    }
+};
