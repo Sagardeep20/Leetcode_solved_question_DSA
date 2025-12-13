@@ -1,0 +1,26 @@
+class Solution {
+    
+  public:
+    void dfsTraversal(int node, int visited[], vector<int>& ls, vector<vector<int>>& adj){
+        visited[node] = 1;
+        ls.push_back(node);
+        
+        for(auto it:adj[node]){
+            if(visited[it] == 0){
+                dfsTraversal(it, visited, ls, adj);
+            }
+        }
+    }
+    
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+        int V = adj.size();
+        int visited[V] = {0};
+        int start = 0;
+        vector<int>ls;
+        
+        dfsTraversal(0, visited, ls, adj);
+        return ls;
+        
+    }
+};
