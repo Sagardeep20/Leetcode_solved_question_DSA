@@ -1,0 +1,39 @@
+TC - O(N+2E)
+SC - o(N)
+
+class Solution {
+  public:
+    bool dfsCycle(int node,int parent,vector<int>& vis,vector<vector<int>>& adjLs){
+        vis[node] = 1;
+        for(auto it:adjLs[node]){
+            if(vis[it] == 0){
+                vis[it] = 1;
+                if(dfsCycle(it,node,vis,adjLs))return true;
+            }
+            else if(it != parent){
+                return true;
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<vector<int>> adjLs(V);
+        for(auto it:edges){
+            int u = it[0];
+            int v = it[1];
+            
+            adjLs[u].push_back(v);
+            adjLs[v].push_back(u);
+        }
+        
+        vector<int>vis(V,0);
+        for(int i=0;i<V;i++){
+            if(vis[i] == 0){
+                if(dfsCycle(i,-1,vis,adjLs))return true;
+            }
+        }
+        return false;
+        
+    }
+};
