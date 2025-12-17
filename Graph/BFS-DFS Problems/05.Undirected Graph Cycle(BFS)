@@ -1,0 +1,47 @@
+TC-o(V + 2E)
+SC-o(V)
+class Solution {
+  public:
+    bool bfscycle(int i,int V,vector<vector<int>>& adjLs,vector<int>& vis){
+        queue<pair<int,int>>q;
+        vis[i] = 1;
+        q.push({i,-1});
+        
+        while(!q.empty()){
+            int node = q.front().first;
+            int parent  = q.front().second;
+            q.pop();
+        
+            for(auto it:adjLs[node]){
+                if(vis[it] == 0){
+                    vis[it] = 1;
+                    q.push({it,node});
+                }
+                else if(it != parent){
+                    return true;
+                }
+            }
+            
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<int>vis(V,0);
+        vector<vector<int>> adjLs(V);
+        
+        for(auto it:edges){
+            int u = it[0];
+            int v = it[1];
+            
+            adjLs[u].push_back(v);
+            adjLs[v].push_back(u);
+        }
+        for(int i=0;i<V;i++){
+            if(vis[i] == 0){
+                if(bfscycle(i,V,adjLs,vis))return true;
+            }
+        }
+        return false;
+    }
+};
