@@ -1,37 +1,39 @@
+GFG- https://www.geeksforgeeks.org/problems/connected-components-in-an-undirected-graph/1
+
 class Solution {
   public:
-    void dfs(int start, vector<int>& vis, vector<vector<int>>& adjLs, vector<vector<int>>& ans){
-        vis[start] = 1;
-        ans.push_back(start);
+    void dfs(int node,vector<int>& vis,vector<vector<int>>& adjLs,vector<int>& temp){
+        temp.push_back(node);
         
-        for(auto it:adjLs[start]){
+        for(auto it:adjLs[node]){
             if(vis[it] == 0){
                 vis[it] = 1;
-                dfs(it, vis, adjLs, ans);
+                dfs(it,vis,adjLs,temp);
             }
         }
     }
     vector<vector<int>> getComponents(int V, vector<vector<int>>& edges) {
         // code here
-        vector<vector<int>> adjLs(V);
-        for(int i=0;i<V;i++){
-            for(int j=0;j<V;j++){
-                if(edges[i][j] == 1 && i != j){
-                    adjLs[i].push_back(j);
-                    adjLs[j].push_back(i);
-                }
-            }
+        vector<vector<int>>adjLs(V);
+        for(auto it:edges){
+            int u = it[0];
+            int v = it[1];
+            
+            adjLs[u].push_back(v);
+            adjLs[v].push_back(u);
         }
         
+        vector<vector<int>>ans;
         vector<int>vis(V,0);
-        vector<vector<int>> ans;
+        
         for(int i=0;i<V;i++){
             if(vis[i] == 0){
-                dfs(i, vis, adjLs, ans);
+                vector<int>temp;
+                vis[i] = 1;
+                dfs(i,vis,adjLs,temp);
+                ans.push_back(temp);
             }
         }
-        
         return ans;
-        
     }
 };
