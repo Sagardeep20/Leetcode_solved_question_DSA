@@ -3,6 +3,7 @@ GFG- https://www.geeksforgeeks.org/problems/connected-components-in-an-undirecte
 class Solution {
   public:
     void dfs(int node,vector<int>& vis,vector<vector<int>>& adjLs,vector<int>& temp){
+        vis[node] = 1;
         temp.push_back(node);
         
         for(auto it:adjLs[node]){
@@ -29,7 +30,7 @@ class Solution {
         for(int i=0;i<V;i++){
             if(vis[i] == 0){
                 vector<int>temp;
-                vis[i] = 1;
+                
                 dfs(i,vis,adjLs,temp);
                 ans.push_back(temp);
             }
@@ -37,3 +38,26 @@ class Solution {
         return ans;
     }
 };
+
+
+
+
+BY BFS- 
+void bfs(int start,vector<int>& vis,vector<vector<int>>& adjLs,vector<int>& temp){
+        vis[start] = 1;
+        queue<int>q;
+        q.push(start);
+        
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            temp.push_back(node);
+            
+            for(auto it:adjLs[node]){
+                if(vis[it] == 0){
+                    vis[it] = 1;
+                    q.push(it);
+                }
+            }
+        }
+    }
