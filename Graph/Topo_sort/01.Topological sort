@@ -1,0 +1,46 @@
+https://www.geeksforgeeks.org/problems/topological-sort/1
+
+class Solution {
+  public:
+    void dfs(int node,stack<int>& st,vector<int>& vis,vector<vector<int>>& adjLs){
+        vis[node] = 1;
+        
+        for(auto it:adjLs[node]){
+            if(vis[it] == 0){
+                dfs(it,st,vis,adjLs);
+            }
+        }
+        
+        st.push(node);
+    }
+    vector<int> topoSort(int V, vector<vector<int>>& edges) {
+        // code here
+        vector<vector<int>>adjLs(V);
+        for(auto it:edges){
+            int u = it[0];
+            int v = it[1];
+            
+            adjLs[u].push_back(v);
+        }
+        
+        
+        stack<int>st;
+        vector<int>vis(V,0);
+        
+        for(int i=0;i<V;i++){
+            if(vis[i] == 0){
+                dfs(i,st,vis,adjLs);
+            }
+        }
+        
+        vector<int>ans;
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        return ans;
+    }
+};
+
+TC - o(n*m) + o(V+E)----->adjLs+dfs
+SC - o(V)+o(V)+o(V)----vis+ans+recursion
