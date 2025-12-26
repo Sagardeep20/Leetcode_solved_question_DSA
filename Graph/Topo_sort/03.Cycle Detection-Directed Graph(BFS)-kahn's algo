@@ -1,0 +1,48 @@
+we know toposort can be applied on DAG(Directed acyclic graph)
+--->so if we do toposort in cyclic directed graph  .. toposort size wont be no of nodes==>it means there is a cycle
+
+ bool isCyclic(int V, vector<vector<int>> &edges) {
+        // code here
+        vector<vector<int>> adjLs(V);
+        for(auto it:edges){
+            int u = it[0];
+            int v = it[1];
+            
+            adjLs[u].push_back(v);
+        }
+        
+        //by BFS-kahn's algo - topo sort
+        vector<int>indegree(V,0);
+        
+        for(int i=0;i<V;i++){
+            for(auto it:adjLs[i]){
+                indegree[it]++;
+            }
+        }
+        
+        queue<int>q;
+        vector<int>ans;
+        
+        for(int i=0;i<V;i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+        
+        while(!q.empty()){
+            int node = q.front();
+            ans.push_back(node);
+            q.pop();
+            
+            for(auto it:adjLs[node]){
+                indegree[it]--;
+                if(indegree[it] == 0){
+                    q.push(it);
+                }
+            }
+        }
+        
+        if(ans.size() != V)return true;
+        return false;
+        
+    }
