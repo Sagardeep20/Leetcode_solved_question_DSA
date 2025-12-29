@@ -1,0 +1,56 @@
+Leetcode - 802 
+
+TC= o(n+E) Sc = o(n)
+Logic = eliminating each node that are cycle or connected with cycle..except thos enode all can reach to terminal node so they is safe node.
+class Solution {
+public:
+    bool dfs(int node,vector<int>& vis,vector<int>& pathvis,vector<int>& check,vector<vector<int>>& adjLs){
+        vis[node] = 1;
+        pathvis[node] = 1;
+        check[node] = 1;
+
+        //if cycle detected then its not a safe node
+        for(auto it:adjLs[node]){
+            if(vis[it] == 0){
+                if(dfs(it,vis,pathvis,check,adjLs)){
+                    check[node] = 0;
+                    return true;
+                };
+            }else if(vis[it] == 1 && pathvis[it] == 1){
+                check[node] = 0;
+                return true;
+            }
+        }
+
+        check[node] = 1;
+        pathvis[node] = 0;
+        return false;
+    }
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<vector<int>> adjLs(n);
+        for(int i=0;i<n;i++){
+            for(auto it:graph[i]){
+                adjLs[i].push_back(it);
+            }
+        }
+
+        vector<int>vis(n,0);
+        vector<int>pathvis(n,0);
+        vector<int>check(n,0);
+        vector<int>ans;
+
+        for(int i=0;i<n;i++){
+            if(vis[i] == 0){
+                dfs(i,vis,pathvis,check,adjLs);
+            }
+        }
+
+        for(int i=0;i<n;i++){
+            if(check[i] == 1){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
