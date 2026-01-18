@@ -1,0 +1,23 @@
+
+class Solution {
+  public:
+    Node *reverse(Node *head) {
+        // code here
+        if (head == NULL || head->next == NULL) return head;
+        
+        Node* current = head;
+        Node* last = NULL;
+        Node* front = NULL;
+        
+        while(current != NULL){
+            front = current->next;
+            last = current->prev;
+            
+            current->next = last;
+            current->prev = front;
+            
+            current = front;
+        }
+        
+        return last->prev;
+    }
