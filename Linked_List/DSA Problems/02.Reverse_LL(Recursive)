@@ -1,0 +1,17 @@
+ ListNode* reverseList(ListNode* head) {
+
+        if(head == NULL || head->next == NULL){
+            return head;
+        }
+
+        ListNode* newHead = reverseList(head->next);
+        ListNode* ans = newHead;
+        //for two nodes
+        ListNode* front = head->next;
+
+        front->next = head;
+        head->next = NULL;
+        return ans;
+}
+TC-o(N)
+SC-o(N)
