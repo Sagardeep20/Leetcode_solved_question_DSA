@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+         unordered_map<int,int> mpp;
+         for(int i=0;i<nums.size();i++){
+            mpp[nums[i]]++;
+         }//o(n)
+        priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>> >minHeap;
+        for(auto &it:mpp){
+            minHeap.push({it.second,it.first});
+            if(minHeap.size() > k){
+                minHeap.pop();
+            }
+        }//o(nlogk) n bcz in map worst case takes all the elements from array and push/pop in heap takes logk
+
+        vector<int> ans;
+        while(minHeap.size() != 0){
+            ans.push_back(minHeap.top().second);
+            minHeap.pop();
+        }// o(klogk)
+        //k elements left in heap and logk for each push/pop
+        return ans;
+
+        //Tc-o(n)+o(nlogk)+o(klogk) == o(n)
+        //sc-o(n)+o(k)+o(k)== o(n)
+
+    }
+};
