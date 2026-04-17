@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int reverse(int &num){
+        int x = 0;
+        while(num != 0){
+            x = (x*10) + (num%10);
+            num = num/10;
+        }
+        return x;
+    }
+    int minMirrorPairDistance(vector<int>& nums) {
+        int mindiff = INT_MAX;
+        unordered_map<int,int>mpp;
+
+        for(int i=0;i<nums.size();i++){
+            //search is that num present in map
+            if(mpp.size() != 0){
+                if(mpp.find(nums[i]) != mpp.end()){
+                    mindiff = min(mindiff,abs(i-mpp[nums[i]]));
+                }
+            }
+            //if the num is not +nt,do reverse of thar num and push in map
+            mpp[reverse(nums[i])] = i;
+            
+        }
+
+        if(mindiff == INT_MAX)return -1;
+        return mindiff;
+    }
+};
